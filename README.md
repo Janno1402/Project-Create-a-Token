@@ -1,7 +1,7 @@
 # Project-Create-a-Token
-This Solidity program is a simple Token Creation that demonstrates the basic functions of declaring variables, using mapping as a reference type, creating functions, as well as making use of conditional statements. The purpose of this program is to demonstrate what I've learned so far in taking the Beginners course on ETH from metacrafters.
+This Solidity smart contract, "ThisToken," is an ERC20-compliant token with additional functionality for the owner to mint tokens and for any user to check their token name, token symbol, balance, transfer, and burn tokens. 
 # Description
-This program is a simple contract written in Solidity, a programming language used for developing smart contracts on the Ethereum blockchain. The contract contains three declared public variables that correspond to Token details. The contract has two functions called mint and burn. The mint function adds an indicated value to the corresponding total supplies of the specified token and adds that value to the balance associated with the Ethereum addresses. The burn function operates the opposite way, where it deducts an indicated value to the corresponding total supplies of the specified token as well as deducts that value to the associated Ethereum addresses balance. This program acts as a basic and clear-cut project showcasing the coding functionalities in Solidity. It can serve as a foundation for developing more advanced projects.
+This program is a simple contract written in Solidity, a programming language used for developing smart contracts on the Ethereum blockchain.  The contract has three functions called mintTokens, transfer and burnTokens. The mint function adds an indicated value to the corresponding total supplies of the specified token and adds that value to the balance associated with the Ethereum addresses. The burn function allows any user to burn tokens and operates the opposite way, where it deducts an indicated value to the corresponding total supplies of the specified token as well as deducts that value to the associated Ethereum addresses balance. The transfer function allows any user to transfer tokens from their balance to another specified address
 ## Getting Started
 
 ### Executing program
@@ -12,27 +12,37 @@ After accessing the Remix website, create a new file by clicking the "+" icon in
 
 ```javascript
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.18;
+pragma solidity ^0.8.13;
 
-contract MyToken {
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.0.0/contracts/token/ERC20/ERC20.sol";
 
-    // public variables here
+contract ThisToken is ERC20{
+    address private contractOwner;
 
-    // mapping variable here
+    constructor() ERC20("ThisToken", "TTN"){
+        contractOwner = msg.sender;
+    }
 
-    // mint function
+    // A mint function where only the contract owner should be able to mint
+    function mintTokens(address to, uint256 amount) public {
+    }
 
-    // burn function
+    // Any user should be able to transfer tokens
+    function transfer(address recipient, uint256 amount) public override returns (bool) {
+    }
 
+    // Any user should be able to burn tokens
+    function burnTokens(uint256 amount) public{
+    }
 }
 
 ```
 
-To compile the code, navigate to the "Solidity Compiler" tab in the left-hand side of the sidebar. Ensure the "Compiler" version is set to "0.8.18", and then click the "Compile FinalProject.sol" button.
+To compile the code, navigate to the "Solidity Compiler" tab in the left-hand side of the sidebar. Ensure the "Compiler" version is set to "0.8.13", and then click the "Compile CreateAndMintToken.sol" button.
 
-After compiling, you can deploy the contract by going to the "Deploy & Run Transactions" tab in the left-hand side of the sidebar. Choose the "My Token - FinalProject.sol" contract from the dropdown menu and click the "Deploy" button.
+After compiling, you can deploy the contract by going to the "Deploy & Run Transactions" tab in the left-hand side of the sidebar. Choose the "My Token - CreateAndMintToken.sol" contract from the dropdown menu and click the "Deploy" button.
 
-Once deployed, you can interact with the contract by calling the balance of the indicated address, as well as making use of the mint and burn functions that were explained before. Select the "mint" and "burn" functions in the left-hand sidebar, and then press the "transact" button to execute the function and add or deduct values from the total supply as well as the balance of the associated address indicated.
+Once deployed, you can interact with the contract by calling the balance of the indicated address, as well as making use of the mint, transfer, and burn functions that were explained before. Select the "mint", "transfer", and "burn" functions in the left-hand sidebar, and then press the "transact" button to execute the function and add, transfer, and deduct values from the balance of the associated address indicated.
 
 ## Authors
 
